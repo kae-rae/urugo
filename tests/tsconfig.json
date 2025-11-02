@@ -1,0 +1,14 @@
+{
+  "extends": "../apps/api/tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest", "@types/jest", "node"],
+    "rootDir": "..",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["../apps/api/src/*"]
+    }
+  },
+  "include": [
+    "api/**/*.ts"
+  ]
+}
