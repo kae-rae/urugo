@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/web"
+    },
+    {
+      "path": "./apps/api"
+    }
+  ],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  OWNER
+  RENTER
+}
+
+model User {
+  id           String        @id @default(uuid())
+  role         Role
+  name         String
+  email        String        @unique
+  createdAt    DateTime      @default(now())
+  properties   Property[]    @relation("OwnerProperties")
+  applications Application[] @relation("RenterApplications")
+}
+
+model Property {
+  id           String        @id @default(uuid())
+  title        String
+  description  String?
+  city         String
+  state        String
+  zipCode      String?
+  rent         Float
+  bedrooms     Int
+  bathrooms    Float
+  petFriendly  Boolean      @default(false)
+  amenities    String[]     @default([])
+  availableFrom DateTime?
+  createdAt    DateTime      @default(now())
+  ownerId      String
+  owner        User          @relation("OwnerProperties", fields: [ownerId], references: [id])
+  applications Application[]
+
+  @@index([city, state])
+  @@index([rent])
+  @@index([availableFrom])
+}
+
+model Application {
+  id           String    @id @default(uuid())
+  submittedAt  DateTime  @default(now())
+  propertyId   String
+  property     Property  @relation(fields: [propertyId], references: [id])
+  renterId     String
+  renter       User      @relation("RenterApplications", fields: [renterId], references: [id])
+  bgCheck      BgCheck?
+}
+
+model BgCheck {
+  id            String      @id @default(uuid())
+  status        String
+  applicationId String      @unique
+  application   Application @relation(fields: [applicationId], references: [id])
+}
