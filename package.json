@@ -4,6 +4,9 @@
   "workspaces": [
     "apps/*"
   ],
+  "engines": {
+    "node": ">=20.11.0"
+  },
   "scripts": {
     "dev": "concurrently \"npm:dev:web\" \"npm:dev:api\"",
     "dev:web": "npm --workspace apps/web run dev",
