@@ -1,5 +1,7 @@
 # HomeMatch Fix Pack
 
+[![CI](https://github.com/kae-rae/urugo/actions/workflows/ci.yml/badge.svg)](https://github.com/kae-rae/urugo/actions)
+
 Run `npm i` at root, then `npm run dev`. Web on 3000, API on 4000.
 
 ## API health endpoint
